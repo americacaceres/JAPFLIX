@@ -9,7 +9,7 @@ let inputBuscar = document.getElementById('inputBuscar');
  document.getElementById('btnBuscar').addEventListener('click', function () {
     let fraseBuscada = inputBuscar.value.trim(); // obtiene la búsqueda del usuario 
   if (fraseBuscada) {
-    BuscarPeliculas (); // buscar y mostrar resultados 
+    BuscarPeliculas (peliculas, fraseBuscada); // buscar y mostrar resultados 
   }
 
  })
@@ -22,9 +22,15 @@ let inputBuscar = document.getElementById('inputBuscar');
         movie.tagline.toLowerCase().includes(fraseBuscadaLower) ||
         movie.overview.toLowerCase().includes(fraseBuscadaLower)
      );
-       peliculasBuscadas.forEach(pelicula => {
-        
-    
+      listaPelis = document.getElementById('lista')
+      listaPelis.innerHTML = ''; 
+       peliculasBuscadas.forEach(pelicula => { 
+
+        listaPelis.innerHTML += `<li> 
+                                 <p class="h6">${movie.title}</p>
+                                 <p>${movie.tagline}</p>
+                                 <p>${movie.vote_average} </p>
+                                </li> `
          });        
     
  }
