@@ -10,8 +10,8 @@ function JsonData (url) { // función para traer los datos del JSON
     fetch(url) 
     .then (response => response.json())
     .then (data => {
-        console.log(data) 
-        let peliculas = data
+        peliculas = data
+    
     })
     .catch (error => {
     console.error('Error al obtener los datos', error); // por si ocurre un error al cargar los datos 
