@@ -6,8 +6,10 @@ deberá mostrar un listado con las películas que coincidan con dicha búsqueda 
  */
 let inputBuscar = document.getElementById('inputBuscar');
 
+ 
  document.getElementById('btnBuscar').addEventListener('click', function () {
-    let fraseBuscada = inputBuscar.value.trim(); // obtiene la búsqueda del usuario 
+  
+  let fraseBuscada = inputBuscar.value.trim(); // obtiene la búsqueda del usuario 
   if (fraseBuscada) {
     BuscarPeliculas (peliculas, fraseBuscada); // buscar y mostrar resultados 
   }
@@ -15,22 +17,31 @@ let inputBuscar = document.getElementById('inputBuscar');
  })
 
  function BuscarPeliculas (peliculasArray, fraseBuscada ) {
-    const fraseBuscadaLower = fraseBuscada.toLowerCase();
+    let fraseBuscadaLower = fraseBuscada.toLowerCase();
     let peliculasBuscadas = peliculasArray.filter (movie =>
         movie.title.toLowerCase().includes(fraseBuscadaLower) ||
-        movie.genres.join(', ').toLowerCase().includes(fraseBuscadaLower) ||
+        movie.genres.map(genre => genre.name.toLowerCase()).some(genreName => genreName.includes(fraseBuscadaLower)) ||
         movie.tagline.toLowerCase().includes(fraseBuscadaLower) ||
         movie.overview.toLowerCase().includes(fraseBuscadaLower)
      );
+     console.log(peliculasBuscadas)
       listaPelis = document.getElementById('lista')
       listaPelis.innerHTML = ''; 
-       peliculasBuscadas.forEach(pelicula => { 
+       peliculasBuscadas.forEach(movie => { 
 
         listaPelis.innerHTML += `<li> 
                                  <p class="h6">${movie.title}</p>
                                  <p>${movie.tagline}</p>
-                                 <p>${movie.vote_average} </p>
+                                 <p>${puntajeEstrellas(movie.vote_average)} </p>
+                                 <hr>
                                 </li> `
          });        
     
+ }
+
+
+ //función para mostrar el puntaje en forma de estrellas
+ function puntajeEstrellas (puntaje) {
+  let estrellas = Math.round(puntaje / 2);
+  return '★'.repeat(estrellas) + '☆'.repeat(5 - estrellas); 
  }
