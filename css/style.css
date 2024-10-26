@@ -34,3 +34,7 @@ main {
     color: lightgray;
     list-style-type: none;
 }
+
+#lista h6 {
+    color: white;
+}

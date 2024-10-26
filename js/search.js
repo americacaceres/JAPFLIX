@@ -29,14 +29,29 @@ let inputBuscar = document.getElementById('inputBuscar');
       listaPelis.innerHTML = ''; 
        peliculasBuscadas.forEach(movie => { 
 
-        listaPelis.innerHTML += `<li> 
-                                 <p class="h6">${movie.title}</p>
+        listaPelis.innerHTML += `<button class="bg-dark text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
+                                 <li> 
+                                 <h6>${movie.title}</h6>
                                  <p>${movie.tagline}</p>
                                  <p>${puntajeEstrellas(movie.vote_average)} </p>
-                                 <hr>
-                                </li> `
-         });        
-    
+                                </li>
+                                </button>
+                                <br>
+<div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasTopLabel"><p class="text-dark">${movie.title}</p></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <p class="text-dark">${movie.overview}</p>
+    <hr>
+    <p class="text-secondary">${movie.genres.map(genre => genre.name)}<p>
+  </div>
+</div>`
+         });      
+
+
+
  }
 
 
