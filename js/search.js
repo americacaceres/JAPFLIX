@@ -45,7 +45,7 @@ let inputBuscar = document.getElementById('inputBuscar');
   <div class="offcanvas-body">
     <p class="text-dark">${movie.overview}</p>
     <hr>
-    <p class="text-secondary">${movie.genres.map(genre => genre.name)}<p>
+    <p class="text-secondary">${movie.genres.map(genre => genre.name)}</p>
   </div>
 </div>`
          });      
