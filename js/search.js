@@ -29,29 +29,15 @@ let inputBuscar = document.getElementById('inputBuscar');
       listaPelis.innerHTML = ''; 
        peliculasBuscadas.forEach(movie => { 
 
-        listaPelis.innerHTML += `<button class="bg-dark text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
+        listaPelis.innerHTML += `<button class="bg-dark text-white" type="button" onclick="showDetails(${movie.id})">
                                  <li> 
                                  <h6>${movie.title}</h6>
                                  <p>${movie.tagline}</p>
                                  <p>${puntajeEstrellas(movie.vote_average)} </p>
                                 </li>
                                 </button>
-                                <br>
-<div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasTopLabel"><p class="text-dark">${movie.title}</p></h5>
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body">
-    <p class="text-dark">${movie.overview}</p>
-    <hr>
-    <p class="text-secondary">${movie.genres.map(genre => genre.name)}<p>
-  </div>
-</div>`
+                                <br> `
          });      
-
-
-
  }
 
 
@@ -60,3 +46,30 @@ let inputBuscar = document.getElementById('inputBuscar');
   let estrellas = Math.round(puntaje / 2);
   return '★'.repeat(estrellas) + '☆'.repeat(5 - estrellas); 
  }
+
+
+//  funcion para mostrar el contenedor superior con los detalles de la pelicula
+function showDetails (movieID) {
+  const shownMovie = peliculas.find (movie => movie.id === movieID);
+  if (shownMovie) {
+    let offcanvaBody = document.getElementById('offcanvas-body');
+    offcanvaBody.innerHTML = ` <h5>${shownMovie.title}</h5>
+                               <p class="text-dark">${shownMovie.overview}</p>
+                               <hr>
+                               <p class="text-secondary">${shownMovie.genres.map(genre => genre.name)}<p>  
+
+         `
+    let menuDesplegable = document.getElementById('menu-desplegable');
+    menuDesplegable.innerHTML = `
+          <li><a class="dropdown-item" href="#">Year:  ${new Date(shownMovie.release_date).getFullYear()}</a></li>
+          <li><a class="dropdown-item" href="#">Runtime:  ${shownMovie.runtime}</a></li>
+          <li><a class="dropdown-item" href="#">Budget:  ${shownMovie.budget}</a></li>
+          <li><a class="dropdown-item" href="#">Revenue:  ${shownMovie.revenue}</a></li>`
+  
+
+
+         const offcanvas = new bootstrap.Offcanvas (document.getElementById('offcanvasTop'));
+         offcanvas.show();
+  }
+};
+
