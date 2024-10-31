@@ -44,7 +44,7 @@ let inputBuscar = document.getElementById('inputBuscar');
  //función para mostrar el puntaje en forma de estrellas
  function puntajeEstrellas (puntaje) {
   let estrellas = Math.round(puntaje / 2);
-  return '★'.repeat(estrellas) + '☆'.repeat(5 - estrellas); 
+  return '<i class="fa-solid fa-star" id="estrella"></i>'.repeat(estrellas) + '<i class="fa-regular fa-star" id="estrella"></i>'.repeat(5 - estrellas); 
  }
 
 
