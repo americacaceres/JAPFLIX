@@ -29,7 +29,7 @@ let inputBuscar = document.getElementById('inputBuscar');
       listaPelis.innerHTML = ''; 
        peliculasBuscadas.forEach(movie => { 
 
-        listaPelis.innerHTML += `<button class="bg-dark text-white" type="button" onclick="showDetails(movie.id)">
+        listaPelis.innerHTML += `<button class="bg-dark text-white" type="button" onclick="showDetails(${movie.id})">
                                  <li> 
                                  <h6>${movie.title}</h6>
                                  <p>${movie.tagline}</p>
@@ -50,12 +50,17 @@ let inputBuscar = document.getElementById('inputBuscar');
 
 //  funcion para mostrar el contenedor superior con los detalles de la pelicula
 function showDetails (movieID) {
-  const shownMovie = peliculasBuscadas.find (movie => movie.id === movieID);
+  const shownMovie = peliculas.find (movie => movie.id === movieID);
   if (shownMovie) {
-    let offcanvaBody = Document.getElementById('offcanvas-body');
-    offcanvaBody.innerHTML = ` <h5>${shownMovie.title}</h5>  
+    let offcanvaBody = document.getElementById('offcanvas-body');
+    offcanvaBody.innerHTML = ` <h5>${shownMovie.title}</h5>
+                               <p class="text-dark">${shownMovie.overview}</p>
+                               <hr>
+                               <p class="text-secondary">${shownMovie.genres.map(genre => genre.name)}<p>  
 
          `
-
+         const offcanvas = new bootstrap.Offcanvas (document.getElementById('offcanvasTop'));
+         offcanvas.show();
   }
-}
+};
+
