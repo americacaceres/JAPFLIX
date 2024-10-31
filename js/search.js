@@ -59,6 +59,15 @@ function showDetails (movieID) {
                                <p class="text-secondary">${shownMovie.genres.map(genre => genre.name)}<p>  
 
          `
+    let menuDesplegable = document.getElementById('menu-desplegable');
+    menuDesplegable.innerHTML = `
+          <li><a class="dropdown-item" href="#">Year:  ${new Date(shownMovie.release_date).getFullYear()}</a></li>
+          <li><a class="dropdown-item" href="#">Runtime:  ${shownMovie.runtime}</a></li>
+          <li><a class="dropdown-item" href="#">Budget:  ${shownMovie.budget}</a></li>
+          <li><a class="dropdown-item" href="#">Revenue:  ${shownMovie.revenue}</a></li>`
+  
+
+
          const offcanvas = new bootstrap.Offcanvas (document.getElementById('offcanvasTop'));
          offcanvas.show();
   }
